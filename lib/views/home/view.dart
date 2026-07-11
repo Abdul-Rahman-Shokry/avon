@@ -1,5 +1,9 @@
+import 'package:avon/core/widgets/app_image.dart';
+import 'package:avon/views/home/pages/categories.dart';
+import 'package:avon/views/home/pages/home.dart';
+import 'package:avon/views/home/pages/my_cart.dart';
+import 'package:avon/views/home/pages/profile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -9,17 +13,18 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
+  int currentIndex = 0;
   final list = [
-    "cart_icon.svg",
-    "categories_icon.svg",
-    "home_icon.svg",
-    "profile_icon.svg",
+    _Model(icon: "home_icon.svg", page: HomePage()),
+    _Model(icon: "categories_icon.svg", page: CategoriesPage()),
+    _Model(icon: "cart_icon.svg", page: MyCartPage()),
+    _Model(icon: "profile_icon.svg", page: ProfilePage()),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: list[currentIndex].page,
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
@@ -46,7 +51,14 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
         child: BottomNavigationBar(
+          onTap: (value){
+            currentIndex = value;
+            setState((){
+
+            });
+          },
           type: BottomNavigationBarType.fixed,
+          currentIndex: currentIndex,
           selectedFontSize: 0,
           unselectedFontSize: 0,
           elevation: 0,
@@ -54,7 +66,12 @@ class _HomeViewState extends State<HomeView> {
           items: List.generate(
             list.length,
             (index) => BottomNavigationBarItem(
-              icon: SvgPicture.asset("assets/svg/${list[index]}"),
+              icon: AppImage(
+                list[index].icon,
+                color: currentIndex == index
+                    ? Theme.of(context).primaryColor
+                    : null,
+              ),
               label: "",
             ),
           ),
@@ -62,4 +79,11 @@ class _HomeViewState extends State<HomeView> {
       ),
     );
   }
+}
+
+class _Model {
+  final String icon;
+  final Widget page;
+
+  _Model({required this.icon, required this.page});
 }
