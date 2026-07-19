@@ -4,6 +4,7 @@ import 'package:avon/views/home/pages/home.dart';
 import 'package:avon/views/home/pages/my_cart.dart';
 import 'package:avon/views/home/pages/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -13,7 +14,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int currentIndex = 0;
+  int currentIndex = 2;
   final list = [
     _Model(icon: "home_icon.svg", page: HomePage()),
     _Model(icon: "categories_icon.svg", page: CategoriesPage()),
@@ -28,22 +29,22 @@ class _HomeViewState extends State<HomeView> {
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 13),
+        margin: EdgeInsets.symmetric(horizontal: 13.w),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         decoration: BoxDecoration(
           color: Color(0xffD9D9D9),
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(25.r),
           boxShadow: [
             BoxShadow(
-              offset: Offset(4, 4),
-              blurRadius: 4,
+              offset: Offset(4.w, 4.h),
+              blurRadius: 4.r,
               spreadRadius: 0,
               blurStyle: BlurStyle.outer,
               color: Colors.black.withValues(alpha: .1),
             ),
             BoxShadow(
-              offset: Offset(-4, -4),
-              blurRadius: 6,
+              offset: Offset(-4.w, -4.h),
+              blurRadius: 6.r,
               spreadRadius: 0,
               blurStyle: BlurStyle.outer,
               color: Colors.black.withValues(alpha: .1),
