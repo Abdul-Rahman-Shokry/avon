@@ -1,4 +1,6 @@
-import 'package:avon/views/home/view.dart';
+import 'package:avon/views/auth/create_account.dart';
+import 'package:avon/views/auth/forgot_password.dart';
+import 'package:avon/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,23 +27,37 @@ class MyApp extends StatelessWidget {
               surfaceTintColor: Colors.transparent,
               elevation: 0,
               titleTextStyle: TextStyle(
-                fontSize: 24,
+                fontSize: 24.sp,
                 fontWeight: FontWeight.bold,
                 color: Color(0xff434C6D),
               ),
             ),
+            filledButtonTheme: FilledButtonThemeData(
+              style: FilledButton.styleFrom(
+                backgroundColor: Color(0xffD75D72),
+                fixedSize: Size.fromHeight(65.h),
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(60.r),
+                )
+              ),
+            ),
             inputDecorationTheme: InputDecorationTheme(
               hintStyle: TextStyle(
-                fontSize: 12,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w500,
                 color: Color(0xff8E8EA9),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(25),
+                borderRadius: BorderRadius.circular(8.r),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(25),
-                borderSide: BorderSide(color: Color(0xffB3B3C1)),
+                borderRadius: BorderRadius.circular(8.r),
+                borderSide: BorderSide(color: Color(0xff5A6690).withValues(alpha: .4)),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.r),
+                borderSide: BorderSide(color: Color(0xff5A6690).withValues(alpha: .4)),
               ),
             ),
             scaffoldBackgroundColor: Color(0xffD9D9D9),
@@ -52,7 +68,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: HomeView(),
+      child: ForgotPasswordView(),
     );
   }
 }
