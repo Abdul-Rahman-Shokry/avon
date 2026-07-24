@@ -1,5 +1,6 @@
 import 'package:avon/views/auth/new_password.dart';
 import 'package:avon/views/auth/success_dialog.dart';
+import 'package:avon/views/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -81,7 +82,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: NewPasswordView(),
+      child: SplashView(),
     );
   }
 }
