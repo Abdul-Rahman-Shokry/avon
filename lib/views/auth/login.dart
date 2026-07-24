@@ -54,7 +54,7 @@ class LoginView extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 43.h),
-              AppButton(text: "Login"),
+              AppButton(text: "Login", onPressed: (){},),
             ],
           ),
         ),
@@ -70,7 +70,13 @@ class LoginView extends StatelessWidget {
                 child: TextButton(
                   style: TextButton.styleFrom(padding: EdgeInsets.zero),
                   onPressed: () {},
-                  child: Text("Register"),
+                  child: Text(
+                    "Register",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12.sp,
+                    ),
+                  ),
                 ),
               ),
             ],

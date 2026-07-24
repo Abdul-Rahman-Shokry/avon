@@ -1,8 +1,8 @@
-import 'package:avon/views/auth/new_password.dart';
-import 'package:avon/views/auth/success_dialog.dart';
-import 'package:avon/views/splash.dart';
+import 'package:avon/views/on_boarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'core/utils/helper_methods.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return MaterialApp(
+          navigatorKey: navKey,
           theme: ThemeData(
             fontFamily: "Montserrat",
             cardColor: Color(0xffD9D9D9),
@@ -41,6 +42,9 @@ class MyApp extends StatelessWidget {
                   borderRadius: BorderRadius.circular(60.r),
                 ),
               ),
+            ),
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+              backgroundColor: Color(0xff434C6D),
             ),
             inputDecorationTheme: InputDecorationTheme(
               labelStyle: TextStyle(
@@ -82,7 +86,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: SplashView(),
+      child: OnBoardingView(),
     );
   }
 }
