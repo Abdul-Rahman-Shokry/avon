@@ -3,6 +3,7 @@ import 'package:avon/core/widgets/app_button.dart';
 import 'package:avon/core/widgets/app_image.dart';
 import 'package:avon/core/widgets/app_input.dart';
 import 'package:avon/views/auth/create_account.dart';
+import 'package:avon/views/auth/forgot_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -49,12 +50,14 @@ class LoginView extends StatelessWidget {
               Align(
                 alignment: AlignmentDirectional.centerEnd,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    goTo(page: ForgotPasswordView(), canPop: true);
+                  },
                   child: Text("Forget Password?"),
                 ),
               ),
               SizedBox(height: 43.h),
-              AppButton(text: "Login", onPressed: (){},),
+              AppButton(text: "Login"),
             ],
           ),
         ),

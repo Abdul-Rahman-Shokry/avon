@@ -1,9 +1,27 @@
+import 'dart:async';
+import 'package:animate_do/animate_do.dart';
 import 'package:avon/core/widgets/app_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SplashView extends StatelessWidget {
+import '../core/utils/helper_methods.dart';
+import 'on_boarding.dart';
+
+class SplashView extends StatefulWidget {
   const SplashView({super.key});
+
+  @override
+  State<SplashView> createState() => _SplashViewState();
+}
+
+class _SplashViewState extends State<SplashView> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(const Duration(seconds: 3), (){
+      goTo(page: OnBoardingView(), canPop: false);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +30,21 @@ class SplashView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AppImage("logo_large.png", width: 220.w, height: 220.h, bottomSpace: 20.h,),
-            AppImage("COSMATICS.png", width: 128.w, height: 18.h, bottomSpace: 7.h),
+            Jello(
+              duration: Duration(seconds: 3),
+              child: AppImage(
+                "logo_large.png",
+                width: 220.w,
+                height: 220.h,
+                bottomSpace: 20.h,
+              ),
+            ),
+            AppImage(
+              "COSMATICS.png",
+              width: 128.w,
+              height: 18.h,
+              bottomSpace: 7.h,
+            ),
             AppImage("splash_image2.png", width: 128.w),
           ],
         ),

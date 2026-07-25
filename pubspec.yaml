@@ -16,6 +16,8 @@ dependencies:
   cached_network_image: ^3.4.1
   flutter_screenutil: ^5.9.3
   lottie: ^3.3.3
+  animate_do: ^5.1.0
+  pinput: ^6.0.2
 
 dev_dependencies:
   flutter_test:

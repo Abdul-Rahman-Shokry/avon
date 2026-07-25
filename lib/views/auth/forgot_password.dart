@@ -1,3 +1,7 @@
+import 'package:avon/core/utils/helper_methods.dart';
+import 'package:avon/core/widgets/app_back.dart';
+import 'package:avon/views/auth/new_password.dart';
+import 'package:avon/views/auth/otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,10 +17,15 @@ class ForgotPasswordView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(13.r).copyWith(top: 40.h),
+          padding: EdgeInsets.all(13.r),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                  child: AppBack(),
+              ),
+              SizedBox(height: 40.h,),
               AppImage("Layer_1.png", width: 67.w, height: 62.h),
               SizedBox(height: 40.h),
               Align(
@@ -46,7 +55,12 @@ class ForgotPasswordView extends StatelessWidget {
               SizedBox(height: 45.h),
               AppInput(label: "Phone Number", withCountryCode: true),
               SizedBox(height: 56.h),
-              AppButton(text: "Next"),
+              AppButton(
+                text: "Next",
+                onPressed: () {
+                  goTo(page: OtpView(), canPop: true);
+                },
+              ),
             ],
           ),
         ),

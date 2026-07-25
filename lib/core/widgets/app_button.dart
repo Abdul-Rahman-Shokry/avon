@@ -10,7 +10,7 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-      onPressed: onPressed,
+      onPressed: onPressed ?? (){},
       child: Text(
         text,
         style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
