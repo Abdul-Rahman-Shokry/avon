@@ -1,7 +1,8 @@
-import 'package:avon/views/auth/new_password.dart';
+import 'package:avon/core/widgets/app_otp.dart';
+import 'package:avon/views/auth/create_password.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pinput/pinput.dart';
 import '../../core/utils/helper_methods.dart';
 import '../../core/widgets/app_back.dart';
 import '../../core/widgets/app_button.dart';
@@ -12,28 +13,6 @@ class OtpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultPinTheme = PinTheme(
-      width: 45.w,
-      height: 45.h,
-      textStyle: TextStyle(
-        fontWeight: FontWeight.w700,
-        fontSize: 16.sp,
-        color: Color(0xff434C6D),
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey, width: 1.w),
-        borderRadius: BorderRadius.circular(8.r),
-      ),
-    );
-
-    final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: Colors.red, width: 1.5.w),
-    );
-
-    final submittedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: Colors.red, width: 1.5.w),
-    );
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -60,33 +39,30 @@ class OtpView extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 40.h),
-              Align(
-                alignment: AlignmentDirectional.center,
-                child: Text(
-                  textAlign: TextAlign.center,
-                  "We just sent a 4-digit verification code to +20 1022658997. Enter the code in the box below to continue.",
-                  style: TextStyle(
-                    color: Color(0xff8E8EA9),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14.sp,
-                  ),
+              Text.rich(
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14.sp,
+                  color: Color(0xff8E8EA9),
+                  height: 1.7.h,
                 ),
-              ),
-              SizedBox(height: 45.h),
-              Pinput(
-                // controller: cubit.otpController,
-                length: 4,
-                defaultPinTheme: defaultPinTheme,
-                focusedPinTheme: focusedPinTheme,
-                submittedPinTheme: submittedPinTheme,
-                showCursor: true,
-                cursor: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                TextSpan(
+                  text:
+                      "We just sent a 4-digit verification code to your email ",
                   children: [
-                    Container(width: 2.w, height: 24.h, color: Colors.grey),
+                    TextSpan(
+                      text: "amramer522@gmail.com. ",
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                    TextSpan(
+                      text: "Enter the code in the box below to continue.",
+                    ),
                   ],
                 ),
               ),
+              SizedBox(height: 45.h),
+              AppOtp(),
               SizedBox(height: 47.h),
               Row(
                 children: [
@@ -129,7 +105,7 @@ class OtpView extends StatelessWidget {
               AppButton(
                 text: "Done",
                 onPressed: () {
-                  goTo(page: NewPasswordView(), canPop: true);
+                  goTo(page: CreatePasswordView(), canPop: true);
                 },
               ),
             ],

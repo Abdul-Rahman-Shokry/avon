@@ -1,6 +1,6 @@
 import 'package:avon/core/utils/helper_methods.dart';
 import 'package:avon/core/widgets/app_back.dart';
-import 'package:avon/views/auth/new_password.dart';
+import 'package:avon/views/auth/create_password.dart';
 import 'package:avon/views/auth/otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

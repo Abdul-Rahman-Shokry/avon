@@ -55,7 +55,9 @@ class CreateAccountView extends StatelessWidget {
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    goTo(page: LoginView(), canPop: true);
+                  },
                   child: Text("Login"),
                 ),
               ),

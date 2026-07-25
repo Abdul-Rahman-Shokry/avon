@@ -5,8 +5,8 @@ import '../../core/widgets/app_button.dart';
 import '../../core/widgets/app_image.dart';
 import '../../core/widgets/app_input.dart';
 
-class NewPasswordView extends StatelessWidget {
-  const NewPasswordView({super.key});
+class CreatePasswordView extends StatelessWidget {
+  const CreatePasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {

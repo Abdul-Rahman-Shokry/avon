@@ -72,7 +72,9 @@ class LoginView extends StatelessWidget {
                 alignment: PlaceholderAlignment.middle,
                 child: TextButton(
                   style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                  onPressed: () {},
+                  onPressed: () {
+                    goTo(page: CreateAccountView(), canPop: true);
+                  },
                   child: Text(
                     "Register",
                     style: TextStyle(

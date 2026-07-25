@@ -1,6 +1,6 @@
 import 'package:avon/views/auth/forgot_password.dart';
 import 'package:avon/views/auth/login.dart';
-import 'package:avon/views/auth/new_password.dart';
+import 'package:avon/views/auth/create_password.dart';
 import 'package:avon/views/auth/otp.dart';
 import 'package:avon/views/on_boarding.dart';
 import 'package:avon/views/splash.dart';
@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: SplashView(),
+      child: OtpView(),
     );
   }
 }
