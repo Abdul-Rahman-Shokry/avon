@@ -58,7 +58,7 @@ class ForgotPasswordView extends StatelessWidget {
               AppButton(
                 text: "Next",
                 onPressed: () {
-                  goTo(page: OtpView(), canPop: true);
+                  goTo(page: OtpView(isFromForgetPassword: true,), canPop: true);
                 },
               ),
             ],

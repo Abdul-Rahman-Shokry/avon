@@ -1,5 +1,6 @@
 import 'package:avon/core/utils/helper_methods.dart';
 import 'package:avon/views/auth/login.dart';
+import 'package:avon/views/auth/otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,7 +20,7 @@ class CreateAccountView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              AppImage("Layer_1.png", width: 67.w, height: 62.h,),
+              AppImage("Layer_1.png", width: 67.w, height: 62.h),
               SizedBox(height: 40.h),
               Align(
                 alignment: AlignmentDirectional.center,
@@ -33,12 +34,17 @@ class CreateAccountView extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 50.h),
-              AppInput(label: "Your Name",),
-              AppInput(label: "Email",),
+              AppInput(label: "Your Name"),
+              AppInput(label: "Email"),
               AppInput(label: "Phone Number", withCountryCode: true),
               AppInput(label: "Create your password", isPassword: true),
               AppInput(label: "Confirm password", isPassword: true),
-              AppButton(text: "Next"),
+              AppButton(
+                text: "Next",
+                onPressed: () {
+                  goTo(page: OtpView(isFromForgetPassword: false,), canPop: false);
+                },
+              ),
             ],
           ),
         ),
@@ -52,9 +58,7 @@ class CreateAccountView extends StatelessWidget {
               WidgetSpan(
                 alignment: PlaceholderAlignment.middle,
                 child: TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                  ),
+                  style: TextButton.styleFrom(padding: EdgeInsets.zero),
                   onPressed: () {
                     goTo(page: LoginView(), canPop: true);
                   },

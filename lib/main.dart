@@ -2,6 +2,7 @@ import 'package:avon/views/auth/forgot_password.dart';
 import 'package:avon/views/auth/login.dart';
 import 'package:avon/views/auth/create_password.dart';
 import 'package:avon/views/auth/otp.dart';
+import 'package:avon/views/home/view.dart';
 import 'package:avon/views/on_boarding.dart';
 import 'package:avon/views/splash.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: OtpView(),
+      child: HomeView(),
     );
   }
 }

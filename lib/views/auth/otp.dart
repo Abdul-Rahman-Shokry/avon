@@ -1,5 +1,8 @@
 import 'package:avon/core/widgets/app_otp.dart';
 import 'package:avon/views/auth/create_password.dart';
+import 'package:avon/views/auth/success_dialog.dart';
+import 'package:avon/views/home/view.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +12,9 @@ import '../../core/widgets/app_button.dart';
 import '../../core/widgets/app_image.dart';
 
 class OtpView extends StatelessWidget {
-  const OtpView({super.key});
+  final bool isFromForgetPassword;
+
+  const OtpView({super.key, this.isFromForgetPassword = true});
 
   @override
   Widget build(BuildContext context) {
@@ -91,21 +96,46 @@ class OtpView extends StatelessWidget {
                     ),
                   ),
                   Spacer(),
-                  Text(
-                    "0:24",
-                    style: TextStyle(
+                  CircularCountDownTimer(
+                    width: 50.w,
+                    height: 40.h,
+                    duration: 5,
+                    isReverse: true,
+                    textFormat: CountdownTextFormat.MM_SS,
+                    textStyle: TextStyle(
                       color: Color(0xff8E8EA9),
                       fontWeight: FontWeight.w500,
                       fontSize: 12.sp,
                     ),
+                    fillColor: Colors.transparent,
+                    ringColor: Colors.transparent,
                   ),
+                  // Text(
+                  //   "0:24",
+                  //   style: TextStyle(
+                  //     color: Color(0xff8E8EA9),
+                  //     fontWeight: FontWeight.w500,
+                  //     fontSize: 12.sp,
+                  //   ),
+                  // ),
                 ],
               ),
               SizedBox(height: 113.h),
               AppButton(
                 text: "Done",
                 onPressed: () {
-                  goTo(page: CreatePasswordView(), canPop: true);
+                  isFromForgetPassword
+                      ? goTo(page: CreatePasswordView(), canPop: true)
+                      : goTo(
+                          page: SuccessDialog(
+                            isFromForgetPassword: false,
+                            title: "Account Activated!",
+                            desc:
+                                "Congratulations! Your account has been successfully activated",
+                            buttonText: "Go to home",
+                          ),
+                          canPop: true,
+                        );
                 },
               ),
             ],

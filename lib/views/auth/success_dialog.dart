@@ -2,11 +2,21 @@ import 'package:avon/core/utils/helper_methods.dart';
 import 'package:avon/core/widgets/app_button.dart';
 import 'package:avon/core/widgets/app_image.dart';
 import 'package:avon/views/auth/login.dart';
+import 'package:avon/views/home/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SuccessDialog extends StatelessWidget {
-  const SuccessDialog({super.key});
+  final String title, desc, buttonText;
+  final bool isFromForgetPassword;
+
+  const SuccessDialog({
+    super.key,
+    required this.title,
+    required this.desc,
+    required this.buttonText,
+    this.isFromForgetPassword = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +26,14 @@ class SuccessDialog extends StatelessWidget {
       insetPadding: EdgeInsets.all(24.r),
       children: [
         SizedBox(width: double.maxFinite),
-        AppImage("success.json", height: 100.h, width: 100.w, bottomSpace: 26.h,),
+        AppImage(
+          "success.json",
+          height: 100.h,
+          width: 100.w,
+          bottomSpace: 26.h,
+        ),
         Text(
-          "Account Activated!",
+          title,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Color(0xff434C6D),
@@ -26,9 +41,9 @@ class SuccessDialog extends StatelessWidget {
             fontSize: 16.sp,
           ),
         ),
-        SizedBox(height: 7.h,),
+        SizedBox(height: 7.h),
         Text(
-          "Congratulations! Your account \nhas been successfully activated",
+          desc,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Color(0xff8E8EA9),
@@ -36,11 +51,11 @@ class SuccessDialog extends StatelessWidget {
             fontSize: 16.sp,
           ),
         ),
-        SizedBox(height: 23.h,),
+        SizedBox(height: 23.h),
         AppButton(
-          text: "Go to home",
+          text: buttonText,
           onPressed: () {
-            goTo(page: LoginView(), canPop: false);
+            goTo(page: isFromForgetPassword ? LoginView() : HomeView(), canPop: false);
           },
         ),
       ],

@@ -4,6 +4,7 @@ import 'package:avon/core/widgets/app_image.dart';
 import 'package:avon/core/widgets/app_input.dart';
 import 'package:avon/views/auth/create_account.dart';
 import 'package:avon/views/auth/forgot_password.dart';
+import 'package:avon/views/home/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -57,7 +58,7 @@ class LoginView extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 43.h),
-              AppButton(text: "Login"),
+              AppButton(text: "Login", onPressed: (){goTo(page: HomeView(), canPop: false);},),
             ],
           ),
         ),

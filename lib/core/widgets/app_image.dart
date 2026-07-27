@@ -9,6 +9,7 @@ class AppImage extends StatelessWidget {
   final String path;
   final double? height, width, bottomSpace;
   final BoxFit fit;
+  final bool isCircle;
   final Color? color;
 
   const AppImage(
@@ -19,6 +20,7 @@ class AppImage extends StatelessWidget {
     this.fit = BoxFit.scaleDown,
     this.color,
     this.bottomSpace,
+    this.isCircle = false,
   });
 
   @override
@@ -29,8 +31,10 @@ class AppImage extends StatelessWidget {
           : EdgeInsets.zero,
       child: Builder(
         builder: (context) {
+          Widget child;
+
           if (path.contains("com.example.avon/cache")) {
-            return Image.file(
+            child = Image.file(
               File(path),
               height: height,
               width: width,
@@ -39,7 +43,7 @@ class AppImage extends StatelessWidget {
               errorBuilder: (context, error, stackTrace) => _errorWidget(),
             );
           } else if (path.endsWith("svg")) {
-            return FutureBuilder(
+            child = FutureBuilder(
               future: DefaultAssetBundle.of(context).load("assets/svg/$path"),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -60,7 +64,7 @@ class AppImage extends StatelessWidget {
               },
             );
           } else if (path.startsWith("http")) {
-            return CachedNetworkImage(
+            child = CachedNetworkImage(
               imageUrl: path,
               height: height,
               width: width,
@@ -76,7 +80,7 @@ class AppImage extends StatelessWidget {
               errorWidget: (context, url, error) => _errorWidget(),
             );
           } else if (path.endsWith("png") || path.endsWith("jpg")) {
-            return Image.asset(
+            child = Image.asset(
               "assets/images/$path",
               height: height,
               width: width,
@@ -85,15 +89,20 @@ class AppImage extends StatelessWidget {
               errorBuilder: (context, error, stackTrace) => _errorWidget(),
             );
           } else if (path.endsWith("json")) {
-            return Lottie.asset(
+            child = Lottie.asset(
               "assets/lotties/$path",
               height: height,
               width: width,
               fit: fit,
               errorBuilder: (context, error, stackTrace) => _errorWidget(),
             );
+          } else {
+            child = _errorWidget();
           }
-          return _errorWidget();
+
+          if(isCircle) return ClipOval(child: child,);
+
+          return child;
         },
       ),
     );

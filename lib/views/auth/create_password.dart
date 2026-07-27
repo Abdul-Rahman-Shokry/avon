@@ -51,8 +51,14 @@ class CreatePasswordView extends StatelessWidget {
                 text: "Confirm",
                 onPressed: () {
                   showDialog(
-                      context: context,
-                      builder: (context) => SuccessDialog());
+                    context: context,
+                    builder: (context) => SuccessDialog(
+                      title: 'Password Created!',
+                      desc:
+                          'Congratulations! Your password has been successfully created',
+                      buttonText: 'Return to login',
+                    ),
+                  );
                 },
               ),
             ],
