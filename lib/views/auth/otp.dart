@@ -1,10 +1,8 @@
 import 'package:avon/core/widgets/app_otp.dart';
 import 'package:avon/views/auth/create_password.dart';
 import 'package:avon/views/auth/success_dialog.dart';
-import 'package:avon/views/home/view.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/utils/helper_methods.dart';
 import '../../core/widgets/app_back.dart';

@@ -41,7 +41,7 @@ class CategoriesPage extends StatelessWidget {
 }
 
 class _Item extends StatelessWidget {
-  const _Item({super.key});
+  const _Item();
 
   @override
   Widget build(BuildContext context) {

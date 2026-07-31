@@ -1,9 +1,3 @@
-import 'package:avon/views/auth/forgot_password.dart';
-import 'package:avon/views/auth/login.dart';
-import 'package:avon/views/auth/create_password.dart';
-import 'package:avon/views/auth/otp.dart';
-import 'package:avon/views/home/view.dart';
-import 'package:avon/views/on_boarding.dart';
 import 'package:avon/views/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,6 +24,7 @@ class MyApp extends StatelessWidget {
             fontFamily: "Montserrat",
             cardColor: Color(0xffD9D9D9),
             appBarTheme: AppBarTheme(
+              centerTitle: true,
               backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               elevation: 0,
@@ -92,7 +87,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: HomeView(),
+      child: SplashView(),
     );
   }
 }

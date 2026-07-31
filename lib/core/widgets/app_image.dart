@@ -25,6 +25,8 @@ class AppImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final myFit = isCircle ? BoxFit.cover : BoxFit.scaleDown;
+
     return Padding(
       padding: bottomSpace != null
           ? EdgeInsets.only(bottom: bottomSpace!)
@@ -33,12 +35,14 @@ class AppImage extends StatelessWidget {
         builder: (context) {
           Widget child;
 
+          if(path.isEmpty) return SizedBox.shrink();
+
           if (path.contains("com.example.avon/cache")) {
             child = Image.file(
               File(path),
               height: height,
               width: width,
-              fit: fit,
+              fit: myFit,
               color: color,
               errorBuilder: (context, error, stackTrace) => _errorWidget(),
             );
@@ -56,7 +60,7 @@ class AppImage extends StatelessWidget {
                   "assets/svg/$path",
                   height: height,
                   width: width,
-                  fit: fit,
+                  fit: myFit,
                   colorFilter: color != null
                       ? ColorFilter.mode(color!, BlendMode.srcIn)
                       : null,
@@ -68,7 +72,7 @@ class AppImage extends StatelessWidget {
               imageUrl: path,
               height: height,
               width: width,
-              fit: fit,
+              fit: myFit,
               color: color,
               placeholder: (context, url) => SizedBox(
                 height: height ?? 24,
@@ -84,7 +88,7 @@ class AppImage extends StatelessWidget {
               "assets/images/$path",
               height: height,
               width: width,
-              fit: fit,
+              fit: myFit,
               color: color,
               errorBuilder: (context, error, stackTrace) => _errorWidget(),
             );
@@ -93,7 +97,7 @@ class AppImage extends StatelessWidget {
               "assets/lotties/$path",
               height: height,
               width: width,
-              fit: fit,
+              fit: myFit,
               errorBuilder: (context, error, stackTrace) => _errorWidget(),
             );
           } else {

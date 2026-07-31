@@ -1,4 +1,6 @@
+import 'package:avon/core/utils/helper_methods.dart';
 import 'package:avon/core/widgets/app_image.dart';
+import 'package:avon/views/checkout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,7 +10,17 @@ class MyCartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("My Cart"), centerTitle: true),
+      appBar: AppBar(title: Text("My Cart"), actions: [
+        Padding(
+          padding: EdgeInsets.only(right: 16.w),
+          child: GestureDetector(
+            onTap: (){
+              goTo(page: Checkout(), canPop: true);
+            },
+            child: AppImage("cart-checkout.svg"),
+          ),
+        ),
+      ],),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(13.r),
@@ -44,7 +56,7 @@ class MyCartPage extends StatelessWidget {
 }
 
 class _Item extends StatefulWidget {
-  const _Item({super.key});
+  const _Item();
 
   @override
   State<_Item> createState() => _ItemState();

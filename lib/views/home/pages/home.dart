@@ -1,5 +1,4 @@
 import 'package:avon/core/widgets/app_image.dart';
-import 'package:avon/core/widgets/app_input.dart';
 import 'package:avon/core/widgets/app_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -106,7 +105,7 @@ class HomePage extends StatelessWidget {
 }
 
 class _Item extends StatelessWidget {
-  const _Item({super.key});
+  const _Item();
 
   @override
   Widget build(BuildContext context) {

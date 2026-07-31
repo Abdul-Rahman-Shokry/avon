@@ -9,16 +9,19 @@ class AppBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (){
-        Navigator.pop(context);
-      },
-      child: CircleAvatar(
-        backgroundColor: Color(0xff101010).withValues(alpha: .05),
-        radius: 18.w,
-        child: Transform.rotate(
-          angle: pi,
-          child: AppImage("forward_stroke.svg", color: Colors.black),
+    return Padding(
+      padding: EdgeInsets.only(left: 16),
+      child: GestureDetector(
+        onTap: (){
+          Navigator.pop(context);
+        },
+        child: CircleAvatar(
+          backgroundColor: Color(0xff101010).withValues(alpha: .05),
+          radius: 18.w,
+          child: Transform.rotate(
+            angle: pi,
+            child: AppImage("forward_stroke.svg", color: Colors.black),
+          ),
         ),
       ),
     );
