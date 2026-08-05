@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:avon/core/widgets/app_image.dart';
+import 'package:avon/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../core/utils/helper_methods.dart';
+import '../main.dart';
 import 'on_boarding.dart';
 
 class SplashView extends StatefulWidget {
@@ -18,9 +20,8 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), (){
-      goTo(page: OnBoardingView(), canPop: false);
-    });
+    bool isFirstTime = prefs.getBool("isFirstTime") ?? true;
+    goTo(page: isFirstTime ? OnBoardingView() : LoginView(), canPop: false, delaySeconds: 3);
   }
 
   @override

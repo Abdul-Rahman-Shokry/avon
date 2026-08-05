@@ -20,6 +20,7 @@ dependencies:
   pinput: ^6.0.2
   circular_countdown_timer: ^0.2.4
   google_maps_flutter: ^2.18.0
+  shared_preferences: ^2.5.5
 
 dev_dependencies:
   flutter_test:

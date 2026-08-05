@@ -1,5 +1,6 @@
 import 'package:avon/core/utils/helper_methods.dart';
 import 'package:avon/core/widgets/app_image.dart';
+import 'package:avon/main.dart';
 import 'package:avon/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -114,6 +115,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         ),
                       ),
                       onPressed: () {
+                        prefs.setBool("isFirstTime", false);
+
                         goTo(page: LoginView(), canPop: false);
                       },
                       child: Text("let’s start!"),
