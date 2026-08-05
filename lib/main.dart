@@ -1,3 +1,4 @@
+import 'package:avon/core/logic/cache_helper.dart';
 import 'package:avon/views/checkout.dart';
 import 'package:avon/views/splash.dart';
 import 'package:flutter/material.dart';
@@ -5,11 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/utils/helper_methods.dart';
 
-late SharedPreferences prefs;
-
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  prefs = await SharedPreferences.getInstance();
+  await CacheHelper.init();
   runApp(const MyApp());
 }
 

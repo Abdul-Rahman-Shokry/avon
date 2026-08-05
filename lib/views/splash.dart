@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:animate_do/animate_do.dart';
+import 'package:avon/core/logic/cache_helper.dart';
 import 'package:avon/core/widgets/app_image.dart';
 import 'package:avon/views/auth/login.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +21,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    bool isFirstTime = prefs.getBool("isFirstTime") ?? true;
-    goTo(page: isFirstTime ? OnBoardingView() : LoginView(), canPop: false, delaySeconds: 3);
+    goTo(page: CacheHelper.isFirstTime ? OnBoardingView() : LoginView(), canPop: false, delaySeconds: 3);
   }
 
   @override

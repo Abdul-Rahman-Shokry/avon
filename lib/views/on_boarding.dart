@@ -1,3 +1,4 @@
+import 'package:avon/core/logic/cache_helper.dart';
 import 'package:avon/core/utils/helper_methods.dart';
 import 'package:avon/core/widgets/app_image.dart';
 import 'package:avon/main.dart';
@@ -62,6 +63,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   alignment: AlignmentDirectional.centerEnd,
                   child: TextButton(
                       onPressed: () {
+                        CacheHelper.setIsNotFirstTime();
                         goTo(page: LoginView(), canPop: false);
                       },
                       child: Text(
@@ -115,8 +117,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         ),
                       ),
                       onPressed: () {
-                        prefs.setBool("isFirstTime", false);
-
+                        CacheHelper.setIsNotFirstTime();
                         goTo(page: LoginView(), canPop: false);
                       },
                       child: Text("let’s start!"),
