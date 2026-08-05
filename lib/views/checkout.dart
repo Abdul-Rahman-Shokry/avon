@@ -3,6 +3,7 @@ import 'package:avon/core/widgets/app_button.dart';
 import 'package:avon/core/widgets/app_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Checkout extends StatelessWidget {
   const Checkout({super.key});
@@ -20,17 +21,35 @@ class Checkout extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40.w).copyWith(top: 20.h),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 40.w,
+                ).copyWith(top: 20.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text("Delivery to"),
                     SizedBox(height: 18.h),
                     _Tile(
-                      leadingWidget: Container(
-                        color: Colors.red,
-                        width: 60.w,
+                      leadingWidget: SizedBox(
+                        width: 70.w,
                         height: 97.h,
+                        child: AbsorbPointer(
+                          child: GoogleMap(
+                            markers: {
+                              Marker(
+                                markerId: MarkerId("My Location"),
+                                position: LatLng(31.5121106, 31.8168448),
+                              ),
+                            },
+                            initialCameraPosition: CameraPosition(
+                              target: LatLng(31.5121106, 31.8168448),
+                              zoom: 10,
+                            ),
+                            // liteModeEnabled: true,
+                            zoomControlsEnabled: false,
+                            myLocationButtonEnabled: false,
+                          ),
+                        ),
                       ),
                       title: "Home",
                       subTitle: "Mansoura, 14 Portsaid St",
