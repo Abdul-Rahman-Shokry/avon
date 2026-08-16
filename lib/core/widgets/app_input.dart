@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppInput extends StatefulWidget {
+  final TextEditingController? controller;
   final String? suffixIcon, hint, label;
   final bool withCountryCode, isPassword;
   final double? bottomSpace;
+  final ValueChanged<String>? onCountryCodeChanged;
+  final String? Function(String?)? validator;
 
   const AppInput({
     super.key,
@@ -16,6 +19,9 @@ class AppInput extends StatefulWidget {
     this.withCountryCode = false,
     this.isPassword = false,
     this.bottomSpace,
+    this.controller,
+    this.onCountryCodeChanged,
+    this.validator,
   });
 
   @override
@@ -30,11 +36,15 @@ class _AppInputState extends State<AppInput> {
     return Padding(
       padding: EdgeInsets.only(bottom: widget.bottomSpace ?? 16.h),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.withCountryCode) AppCountryCode(),
+          if (widget.withCountryCode)
+            AppCountryCode(onCountryCodeChanged: widget.onCountryCodeChanged),
           if (widget.withCountryCode) SizedBox(width: 6.w),
           Expanded(
             child: TextFormField(
+              validator: widget.validator,
+              controller: widget.controller,
               obscureText: widget.isPassword && isHidden,
               decoration: InputDecoration(
                 hintText: widget.hint,

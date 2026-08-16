@@ -4,20 +4,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'app_image.dart';
 
 class AppCountryCode extends StatefulWidget {
-  const AppCountryCode({super.key});
+  final ValueChanged<String>? onCountryCodeChanged;
+  const AppCountryCode({super.key, required this.onCountryCodeChanged});
 
   @override
   State<AppCountryCode> createState() => _AppCountryCodeState();
 }
 
 class _AppCountryCodeState extends State<AppCountryCode> {
-  late int selectedCountryCode;
-  final list = [10, 20, 30, 40, 50];
+  late String selectedCountryCode;
+  final list = ["+10", "+20", "+30", "+40", "+50"];
 
   @override
   void initState() {
     super.initState();
     selectedCountryCode = list.first;
+    widget.onCountryCodeChanged?.call(selectedCountryCode);
   }
 
   @override
@@ -33,7 +35,7 @@ class _AppCountryCodeState extends State<AppCountryCode> {
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.h),
-        child: DropdownButton<int>(
+        child: DropdownButton<String>(
           icon: Padding(
             padding: EdgeInsetsDirectional.only(start: 6.w),
             child: AppImage(
@@ -49,7 +51,7 @@ class _AppCountryCodeState extends State<AppCountryCode> {
                 (e) => DropdownMenuItem(
               value: e,
               child: Text(
-                "$e",
+                e,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 16.sp,
@@ -60,6 +62,7 @@ class _AppCountryCodeState extends State<AppCountryCode> {
               .toList(),
           onChanged: (value) {
             selectedCountryCode = value!;
+            widget.onCountryCodeChanged?.call(selectedCountryCode);
             setState(() {});
           },
         ),

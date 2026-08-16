@@ -1,4 +1,5 @@
 import 'package:avon/core/logic/cache_helper.dart';
+import 'package:avon/views/auth/login.dart';
 import 'package:avon/views/checkout.dart';
 import 'package:avon/views/splash.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: SplashView(),
+      child: LoginView(),
     );
   }
 }
