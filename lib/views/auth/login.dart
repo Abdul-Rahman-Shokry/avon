@@ -1,10 +1,10 @@
+import 'package:avon/core/logic/input_validator.dart';
 import 'package:avon/core/utils/helper_methods.dart';
 import 'package:avon/core/widgets/app_button.dart';
 import 'package:avon/core/widgets/app_image.dart';
 import 'package:avon/core/widgets/app_input.dart';
 import 'package:avon/views/auth/create_account.dart';
 import 'package:avon/views/auth/forgot_password.dart';
-import 'package:avon/views/home/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,6 +19,7 @@ class _LoginViewState extends State<LoginView> {
   String? selectedCountryCode;
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
+  bool isLoginClicked = false;
 
   final formKey = GlobalKey<FormState>();
 
@@ -28,6 +29,12 @@ class _LoginViewState extends State<LoginView> {
       body: SafeArea(
         child: Form(
           key: formKey,
+          // autovalidateMode: AutovalidateMode.onUserInteraction,
+          onChanged: (){
+            if(isLoginClicked){
+              formKey.currentState!.validate();
+            }
+          },
           child: SingleChildScrollView(
             padding: EdgeInsets.all(13.r).copyWith(top: 48.h),
             child: Column(
@@ -66,24 +73,14 @@ class _LoginViewState extends State<LoginView> {
                   onCountryCodeChanged: (value) {
                     selectedCountryCode = value;
                   },
-                  validator: (value) {
-                    if(value!.isEmpty){
-                      return "Phone number is required";
-                    }
-                    return null;
-                  },
+                  validator: InputValidator.phoneValidator,
                 ),
                 AppInput(
                   label: "Password",
                   isPassword: true,
                   bottomSpace: 0,
                   controller: passwordController,
-                  validator: (value) {
-                    if(value!.isEmpty){
-                      return "Password is required";
-                    }
-                    return null;
-                  },
+                  validator: InputValidator.passwordValidator,
                 ),
                 Align(
                   alignment: AlignmentDirectional.centerEnd,
@@ -97,7 +94,9 @@ class _LoginViewState extends State<LoginView> {
                 SizedBox(height: 43.h),
                 AppButton(
                   text: "Login",
+                  isLoading: false,
                   onPressed: () {
+                    isLoginClicked = true;
                     if(formKey.currentState!.validate()){
                       final phone = phoneController.text.trim();
                       final password = passwordController.text.trim();

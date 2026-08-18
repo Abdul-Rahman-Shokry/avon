@@ -1,6 +1,6 @@
 import 'package:avon/core/widgets/app_image.dart';
 import 'package:avon/views/home/pages/categories.dart';
-import 'package:avon/views/home/pages/home.dart';
+import 'package:avon/views/home/pages/home/view.dart';
 import 'package:avon/views/home/pages/my_cart.dart';
 import 'package:avon/views/home/pages/profile/view.dart';
 import 'package:flutter/material.dart';

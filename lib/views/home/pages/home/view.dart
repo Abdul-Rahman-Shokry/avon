@@ -1,7 +1,11 @@
 import 'package:avon/core/widgets/app_image.dart';
 import 'package:avon/core/widgets/app_search.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+part 'widgets/offers.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,61 +22,7 @@ class HomePage extends StatelessWidget {
               children: [
                 AppSearch(),
                 SizedBox(height: 13.h),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(40.r),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      AppImage(
-                        "https://i.pinimg.com/originals/c7/72/34/c7723462882a41ebae4d3d6d874707d1.jpg",
-                        width: double.infinity,
-                        height: 320.h,
-                        fit: BoxFit.cover,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xffE9DCD3).withValues(alpha: .8),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "50% OFF DISCOUNT\nCUPON CODE : 125865",
-                                    style: TextStyle(
-                                      color: Color(0xff62322D),
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  AppImage("offer.svg"),
-                                ],
-                              ),
-                              SizedBox(height: 12.h),
-                              Row(
-                                children: [
-                                  AppImage("offer.svg"),
-                                  Spacer(),
-                                  Text(
-                                    "Hurry up!\nSkin care only !",
-                                    style: TextStyle(
-                                      color: Color(0xff434C6D),
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                _Offers(),
                 SizedBox(height: 24.h),
                 Text(
                   "Top rated products",
