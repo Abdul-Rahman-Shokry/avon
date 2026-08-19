@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 part 'widgets/offers.dart';
+part 'widgets/products.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,18 +34,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 14.h),
-                GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 10,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                    childAspectRatio: 176 / 237,
-                  ),
-                  itemBuilder: (context, index) => _Item(),
-                ),
+                _Products(),
               ],
             ),
           ),
@@ -55,7 +45,9 @@ class HomePage extends StatelessWidget {
 }
 
 class _Item extends StatelessWidget {
-  const _Item();
+  final ProductModel model;
+
+  const _Item({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +73,7 @@ class _Item extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4.r),
               child: AppImage(
-                "frame_6.jpg",
+                model.imageUrl,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
@@ -89,7 +81,7 @@ class _Item extends StatelessWidget {
           ),
           SizedBox(height: 11.h),
           Text(
-            "Face tint / lip tint",
+            model.nameEn,
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 14.sp,
@@ -98,7 +90,7 @@ class _Item extends StatelessWidget {
           ),
           SizedBox(height: 11.h),
           Text(
-            "\$44.99",
+            "${model.price} \$",
             style: TextStyle(
               color: Color(0xff70839C),
               fontSize: 12.sp,

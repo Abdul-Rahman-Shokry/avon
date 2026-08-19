@@ -1,7 +1,10 @@
 import 'package:avon/core/widgets/app_image.dart';
 import 'package:avon/core/widgets/app_search.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+part './widgets/categories.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
@@ -17,21 +20,7 @@ class CategoriesPage extends StatelessWidget {
             children: [
               AppSearch(),
               SizedBox(height: 32.h),
-              ListView.separated(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 13.w,
-                  vertical: 30.h,
-                ).copyWith(bottom: 100.h),
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 10,
-                itemBuilder: (context, index) =>
-                    SizedBox(width: 65.w, height: 65.h, child: _Item()),
-                separatorBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.h),
-                  child: Divider(),
-                ),
-              ),
+              _Categories(),
             ],
           ),
         ),
@@ -41,21 +30,25 @@ class CategoriesPage extends StatelessWidget {
 }
 
 class _Item extends StatelessWidget {
-  const _Item();
+  final CategoryItemModel model;
+
+  const _Item({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10.r),
+        SizedBox(
+          width: 70.w,
+          height: 70.h,
           child: AppImage(
-            "https://www.thedetoxmarket.ca/cdn/shop/files/1x1_ILIA_2022_BS_TSSC_SFFP.jpg?v=1772714924",
+            model.imageUrl,
+            fit: BoxFit.contain,
           ),
         ),
         SizedBox(width: 12.w),
         Text(
-          "Bundles",
+          model.titleEn,
           style: TextStyle(
             color: Color(0xff434C6D),
             fontWeight: FontWeight.w600,

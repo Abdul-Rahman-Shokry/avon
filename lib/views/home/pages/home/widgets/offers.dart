@@ -98,15 +98,6 @@ class _OffersState extends State<_Offers> {
   }
 }
 
-// "id": 2,
-// "coupon_code": "WINTER2026",
-// "discount_percent": 30,
-// "description_title1_en": "Winter Sale",
-// "description_title1_ar": "عروض الشتاء",
-// "description_title2_en": "Up to 30% off",
-// "description_title2_ar": "خصم يصل الى 30%",
-// "image_url": "https://i.pinimg.com/"
-
 class OffersData {
   late List<OfferModel> list;
 

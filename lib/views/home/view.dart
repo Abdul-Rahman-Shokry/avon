@@ -1,5 +1,5 @@
 import 'package:avon/core/widgets/app_image.dart';
-import 'package:avon/views/home/pages/categories.dart';
+import 'package:avon/views/home/pages/categories/view.dart';
 import 'package:avon/views/home/pages/home/view.dart';
 import 'package:avon/views/home/pages/my_cart.dart';
 import 'package:avon/views/home/pages/profile/view.dart';
@@ -14,7 +14,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int currentIndex = 0;
+  int currentIndex = 1;
   final list = [
     _Model(icon: "home_icon.svg", page: HomePage()),
     _Model(icon: "categories_icon.svg", page: CategoriesPage()),
