@@ -36,11 +36,7 @@ class _CategoriesState extends State<_Categories> {
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: list!.length,
-            itemBuilder: (context, index) => SizedBox(
-              width: 65.w,
-              height: 65.h,
-              child: _Item(model: list![index]),
-            ),
+            itemBuilder: (context, index) => _Item(model: list![index]),
             separatorBuilder: (context, index) => Padding(
               padding: EdgeInsets.symmetric(vertical: 20.h),
               child: Divider(),
@@ -66,9 +62,9 @@ class CategoryItemModel {
   late final String imageUrl;
 
   CategoryItemModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    titleEn = json['title_en'];
-    titleAr = json['title_ar'];
-    imageUrl = json['image_url'];
+    id = json['id'] ?? 0;
+    titleEn = json['title_en'] ?? "";
+    titleAr = json['title_ar'] ?? "";
+    imageUrl = json['image_url'] ?? "";
   }
 }

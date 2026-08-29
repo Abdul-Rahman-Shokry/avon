@@ -38,12 +38,16 @@ class _Item extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
-          width: 70.w,
-          height: 70.h,
-          child: AppImage(
-            model.imageUrl,
-            fit: BoxFit.contain,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(10.r),
+          child: SizedBox(
+            width: 70.w,
+            height: 70.h,
+            child: AppImage(
+              model.imageUrl,
+              fit: BoxFit.cover,
+          
+            ),
           ),
         ),
         SizedBox(width: 12.w),

@@ -25,7 +25,7 @@ class AppImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final myFit = isCircle ? BoxFit.cover : BoxFit.scaleDown;
+    final myFit = isCircle ? BoxFit.cover : fit;
 
     return Padding(
       padding: bottomSpace != null

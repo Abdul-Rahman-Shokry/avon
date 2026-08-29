@@ -1,3 +1,5 @@
+import 'package:avon/core/logic/cache_helper.dart';
+import 'package:avon/core/logic/dio_helper.dart';
 import 'package:avon/core/logic/input_validator.dart';
 import 'package:avon/core/utils/helper_methods.dart';
 import 'package:avon/core/widgets/app_button.dart';
@@ -5,6 +7,7 @@ import 'package:avon/core/widgets/app_image.dart';
 import 'package:avon/core/widgets/app_input.dart';
 import 'package:avon/views/auth/create_account.dart';
 import 'package:avon/views/auth/forgot_password.dart';
+import 'package:avon/views/home/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,6 +26,56 @@ class _LoginViewState extends State<LoginView> {
 
   final formKey = GlobalKey<FormState>();
 
+  DataState? state;
+
+  Future<void> login() async {
+    state = DataState.loading;
+    setState(() {});
+
+    final phone = phoneController.text.trim();
+    final password = passwordController.text.trim();
+    // debugPrint(phone);
+    // debugPrint(password);
+    // debugPrint(selectedCountryCode);
+
+    final resp = await DioHelper.postData(
+      "/api/Auth/login",
+      body: {
+        "countryCode": selectedCountryCode,
+        "phoneNumber": phone,
+        "password": password,
+      },
+    );
+
+    // {
+    // "token": ".....",
+    // "refreshToken": "...",
+    //   "user": {
+    //       "id": 11316,
+    //       "username": "Cristiano Ronaldo", <--------
+    //       "email": "...@gmail.com",
+    //       "phoneNumber": "...",
+    //       "countryCode": "+20",
+    //       "role": "Customer",
+    //       "profilePhotoUrl": "...",
+    //       "otpCode": null,
+    //       "otpExpiration": null
+    //   }
+    // }
+
+    if (resp.isSuccess) {
+      state = DataState.success;
+      showMsg("Welcome: ${resp.successData["user"]["username"]}");
+      final model = UserData.fromJson(resp.successData);
+      await CacheHelper.saveUserData(model);
+      goTo(page: HomeView(), canPop: false);
+    } else {
+      state = DataState.loading;
+      showMsg(resp.errorMsg, isError: true);
+    }
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,8 +83,8 @@ class _LoginViewState extends State<LoginView> {
         child: Form(
           key: formKey,
           // autovalidateMode: AutovalidateMode.onUserInteraction,
-          onChanged: (){
-            if(isLoginClicked){
+          onChanged: () {
+            if (isLoginClicked) {
               formKey.currentState!.validate();
             }
           },
@@ -94,15 +147,11 @@ class _LoginViewState extends State<LoginView> {
                 SizedBox(height: 43.h),
                 AppButton(
                   text: "Login",
-                  isLoading: false,
+                  isLoading: state == DataState.loading,
                   onPressed: () {
                     isLoginClicked = true;
-                    if(formKey.currentState!.validate()){
-                      final phone = phoneController.text.trim();
-                      final password = passwordController.text.trim();
-                      debugPrint(phone);
-                      debugPrint(password);
-                      debugPrint(selectedCountryCode);
+                    if (formKey.currentState!.validate()) {
+                      login();
                     }
                     // goTo(page: HomeView(), canPop: false);
                   },
@@ -139,5 +188,37 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
+  }
+}
+
+class UserData {
+  late final String token;
+  late final String refreshToken;
+  late final UserModel user;
+
+  UserData.fromJson(Map<String, dynamic> json) {
+    token = json['token'] ?? "";
+    refreshToken = json['refreshToken'] ?? "";
+    user = UserModel.fromJson(json['user'] ?? {});
+  }
+}
+
+class UserModel {
+  late final int id;
+  late final String username;
+  late final String email;
+  late final String phoneNumber;
+  late final String countryCode;
+  late final String role;
+  late final String profilePhotoUrl;
+
+  UserModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'] ?? 0;
+    username = json['username'] ?? "";
+    email = json['email'] ?? "";
+    phoneNumber = json['phoneNumber'] ?? "";
+    countryCode = json['countryCode'] ?? "";
+    role = json['role'] ?? "";
+    profilePhotoUrl = json['profilePhotoUrl'] ?? "";
   }
 }

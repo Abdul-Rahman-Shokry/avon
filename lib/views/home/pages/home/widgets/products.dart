@@ -44,16 +44,6 @@ class _ProductsState extends State<_Products> {
   }
 }
 
-// "id": 2,
-// "name_en": "Athe Red lipstick",
-// "name_ar": "احمر شفاه",
-// "description_en": "",
-// "description_ar": "",
-// "price": 60.99,
-// "stock": 0,
-// "image_url": "https://i.pinimg...ff8659c.jpg",
-// "category_id": 6
-
 class ProductsData {
   late final List<ProductModel> list;
 
@@ -76,14 +66,14 @@ class ProductModel {
   late final int categoryId;
 
   ProductModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    nameEn = json['name_en'];
-    nameAr = json['name_ar'];
-    descriptionEn = json['description_en'];
-    descriptionAr = json['description_ar'];
-    price = json['price'];
-    stock = json['stock'];
-    imageUrl = json['image_url'];
-    categoryId = json['category_id'];
+    id = json['id'] ?? 0;
+    nameEn = json['name_en'] ?? "";
+    nameAr = json['name_ar'] ?? "";
+    descriptionEn = json['description_en'] ?? "";
+    descriptionAr = json['description_ar'] ?? "";
+    price = json['price'] ?? 0;
+    stock = json['stock'] ?? 0;
+    imageUrl = json['image_url'] ?? "";
+    categoryId = json['category_id'] ?? 0;
   }
 }
