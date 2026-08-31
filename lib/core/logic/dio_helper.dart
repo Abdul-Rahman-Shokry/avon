@@ -1,3 +1,6 @@
+import 'package:avon/core/logic/cache_helper.dart';
+import 'package:avon/core/utils/helper_methods.dart';
+import 'package:avon/views/auth/login.dart';
 import 'package:dio/dio.dart';
 
 enum DataState { loading, failed, success }
@@ -13,12 +16,10 @@ class DioHelper {
     ),
   );
 
-  static String? token;
-
-  static Future<CustomResponse> postData(String endpoint, {Map<String, dynamic>? body,}) async {
+  static Future<CustomResponse> postData(String endpoint, {Map<String, dynamic>? body, bool withToken = false}) async {
     Map<String, dynamic> requestHeaders = {};
-    if (token != null) {
-      requestHeaders["Authorization"] = "Bearer $token";
+    if(withToken){
+      requestHeaders["Authorization"] = CacheHelper.token != null ? "Bearer ${CacheHelper.token}" : null;
     }
 
     try {
@@ -28,22 +29,26 @@ class DioHelper {
         options: Options(headers: requestHeaders),
       );
 
-      if (endpoint == "/api/Auth/login") {
-        token = resp.data["token"];
-      } else if (endpoint == "/api/Auth/logout") {
-        token = null;
-        print("Logged out successfully, Token cleared.");
-      }
-
       if (resp.statusCode != null &&
           resp.statusCode! >= 200 &&
           resp.statusCode! < 300) {
         return CustomResponse(isSuccess: true, successData: resp.data);
-      } else {
-        return CustomResponse(isSuccess: false);
       }
 
+      return CustomResponse(isSuccess: false);
+
     } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        CacheHelper.clearSharedPrefs();
+        goTo(page: LoginView(), canPop: false);
+
+        return CustomResponse(
+          isSuccess: false,
+          errorMsg: "Session expired. Please login again.",
+          errorStatusCode: 401,
+        );
+      }
+
       String? errorMessage;
       if (e.response?.data != null && e.response?.data is Map) {
         errorMessage = e.response?.data["message"];
@@ -61,10 +66,10 @@ class DioHelper {
     }
   }
 
-  static Future<CustomResponse> getData(String endpoint, {Map<String, dynamic>? queryParameters,}) async {
+  static Future<CustomResponse> getData(String endpoint, {Map<String, dynamic>? queryParameters, bool withToken = false}) async {
     Map<String, dynamic> requestHeaders = {};
-    if (token != null) {
-      requestHeaders["Authorization"] = "Bearer $token";
+    if(withToken){
+      requestHeaders["Authorization"] = CacheHelper.token != null ? "Bearer ${CacheHelper.token}" : null;
     }
 
     try {

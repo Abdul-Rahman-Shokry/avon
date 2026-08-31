@@ -2,13 +2,13 @@ part of '../view.dart';
 
 class _Item extends StatelessWidget {
   final String title;
-  final VoidCallback? onTap;
   final bool isLogout;
+  final Widget? destinationPage;
 
   const _Item({
     required this.title,
-    this.onTap,
     this.isLogout = false,
+    this.destinationPage,
   });
 
   @override
@@ -16,7 +16,21 @@ class _Item extends StatelessWidget {
     final String leading = "${title.toLowerCase().replaceAll(" ", "_")}.svg";
 
     return ListTile(
-      onTap: onTap ?? () {},
+      onTap: destinationPage == null
+          ? null
+          : () async {
+              if (isLogout) {
+                final resp = await DioHelper.postData("/api/Auth/logout", withToken: true,);
+                if (resp.isSuccess){
+                  goTo(page: destinationPage!, canPop: false);
+                  CacheHelper.clearSharedPrefs();
+                  // clear cache
+                } else {
+                  showMsg("Something went wrong", isError: true);
+                }
+              }
+              goTo(page: destinationPage!, canPop: false);
+            },
       leading: AppImage(leading),
       title: !isLogout
           ? Text(title)

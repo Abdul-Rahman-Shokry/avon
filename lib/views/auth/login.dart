@@ -66,8 +66,8 @@ class _LoginViewState extends State<LoginView> {
     if (resp.isSuccess) {
       state = DataState.success;
       showMsg("Welcome: ${resp.successData["user"]["username"]}");
-      final model = UserData.fromJson(resp.successData);
-      await CacheHelper.saveUserData(model);
+      final data = UserData.fromJson(resp.successData);
+      await CacheHelper.saveUserData(data: data);
       goTo(page: HomeView(), canPop: false);
     } else {
       state = DataState.loading;
