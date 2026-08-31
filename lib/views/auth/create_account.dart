@@ -1,5 +1,5 @@
 import 'package:avon/core/utils/helper_methods.dart';
-import 'package:avon/views/auth/login.dart';
+import 'package:avon/views/auth/login/view.dart';
 import 'package:avon/views/auth/otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

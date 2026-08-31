@@ -1,4 +1,3 @@
-import 'package:avon/core/logic/cache_helper.dart';
 import 'package:avon/core/logic/dio_helper.dart';
 import 'package:avon/core/logic/input_validator.dart';
 import 'package:avon/core/utils/helper_methods.dart';
@@ -7,7 +6,7 @@ import 'package:avon/core/widgets/app_image.dart';
 import 'package:avon/core/widgets/app_input.dart';
 import 'package:avon/views/auth/create_account.dart';
 import 'package:avon/views/auth/forgot_password.dart';
-import 'package:avon/views/home/view.dart';
+import 'package:avon/views/auth/login/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,75 +18,15 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  String? selectedCountryCode;
-  final phoneController = TextEditingController();
-  final passwordController = TextEditingController();
-  bool isLoginClicked = false;
-
-  final formKey = GlobalKey<FormState>();
-
-  DataState? state;
-
-  Future<void> login() async {
-    state = DataState.loading;
-    setState(() {});
-
-    final phone = phoneController.text.trim();
-    final password = passwordController.text.trim();
-    // debugPrint(phone);
-    // debugPrint(password);
-    // debugPrint(selectedCountryCode);
-
-    final resp = await DioHelper.postData(
-      "/api/Auth/login",
-      body: {
-        "countryCode": selectedCountryCode,
-        "phoneNumber": phone,
-        "password": password,
-      },
-    );
-
-    // {
-    // "token": ".....",
-    // "refreshToken": "...",
-    //   "user": {
-    //       "id": 11316,
-    //       "username": "Cristiano Ronaldo", <--------
-    //       "email": "...@gmail.com",
-    //       "phoneNumber": "...",
-    //       "countryCode": "+20",
-    //       "role": "Customer",
-    //       "profilePhotoUrl": "...",
-    //       "otpCode": null,
-    //       "otpExpiration": null
-    //   }
-    // }
-
-    if (resp.isSuccess) {
-      state = DataState.success;
-      showMsg("Welcome: ${resp.successData["user"]["username"]}");
-      final data = UserData.fromJson(resp.successData);
-      await CacheHelper.saveUserData(data: data);
-      goTo(page: HomeView(), canPop: false);
-    } else {
-      state = DataState.loading;
-      showMsg(resp.errorMsg, isError: true);
-    }
-    setState(() {});
-  }
+  final controller = LoginController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Form(
-          key: formKey,
-          // autovalidateMode: AutovalidateMode.onUserInteraction,
-          onChanged: () {
-            if (isLoginClicked) {
-              formKey.currentState!.validate();
-            }
-          },
+          key: controller.formKey,
+          onChanged: controller.onChangeFormData,
           child: SingleChildScrollView(
             padding: EdgeInsets.all(13.r).copyWith(top: 48.h),
             child: Column(
@@ -121,40 +60,30 @@ class _LoginViewState extends State<LoginView> {
                 SizedBox(height: 25.h),
                 AppInput(
                   label: "Phone Number",
-                  controller: phoneController,
+                  controller: controller.phoneController,
                   withCountryCode: true,
-                  onCountryCodeChanged: (value) {
-                    selectedCountryCode = value;
-                  },
+                  onCountryCodeChanged: controller.onCountryCodeChanged,
                   validator: InputValidator.phoneValidator,
                 ),
                 AppInput(
                   label: "Password",
                   isPassword: true,
                   bottomSpace: 0,
-                  controller: passwordController,
+                  controller: controller.passwordController,
                   validator: InputValidator.passwordValidator,
                 ),
                 Align(
                   alignment: AlignmentDirectional.centerEnd,
                   child: TextButton(
-                    onPressed: () {
-                      goTo(page: ForgotPasswordView(), canPop: true);
-                    },
+                    onPressed: () => goTo(page: ForgotPasswordView(), canPop: true),
                     child: Text("Forget Password?"),
                   ),
                 ),
                 SizedBox(height: 43.h),
                 AppButton(
                   text: "Login",
-                  isLoading: state == DataState.loading,
-                  onPressed: () {
-                    isLoginClicked = true;
-                    if (formKey.currentState!.validate()) {
-                      login();
-                    }
-                    // goTo(page: HomeView(), canPop: false);
-                  },
+                  isLoading: controller.loginButtonIsLoading,
+                  onPressed: controller.onPressLoginButton,
                 ),
               ],
             ),
@@ -188,37 +117,5 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
-  }
-}
-
-class UserData {
-  late final String token;
-  late final String refreshToken;
-  late final UserModel user;
-
-  UserData.fromJson(Map<String, dynamic> json) {
-    token = json['token'] ?? "";
-    refreshToken = json['refreshToken'] ?? "";
-    user = UserModel.fromJson(json['user'] ?? {});
-  }
-}
-
-class UserModel {
-  late final int id;
-  late final String username;
-  late final String email;
-  late final String phoneNumber;
-  late final String countryCode;
-  late final String role;
-  late final String profilePhotoUrl;
-
-  UserModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'] ?? 0;
-    username = json['username'] ?? "";
-    email = json['email'] ?? "";
-    phoneNumber = json['phoneNumber'] ?? "";
-    countryCode = json['countryCode'] ?? "";
-    role = json['role'] ?? "";
-    profilePhotoUrl = json['profilePhotoUrl'] ?? "";
   }
 }

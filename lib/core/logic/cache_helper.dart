@@ -1,5 +1,6 @@
-import 'package:avon/views/auth/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../views/auth/login/model.dart';
 
 class CacheHelper {
   static late SharedPreferences _prefs;
@@ -60,5 +61,9 @@ class CacheHelper {
     await _prefs.remove("phoneNumber");
     await _prefs.remove("email");
     // don't remove `isFirstTime`
+  }
+
+  static String get email {
+    return _prefs.getString("email") ?? "";
   }
 }

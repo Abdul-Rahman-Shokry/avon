@@ -1,7 +1,7 @@
 part of '../view.dart';
 
 class _Categories extends StatefulWidget {
-  const _Categories({super.key});
+  const _Categories();
 
   @override
   State<_Categories> createState() => _CategoriesState();

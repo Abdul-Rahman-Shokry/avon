@@ -1,7 +1,7 @@
 part of '../view.dart';
 
 class _Offers extends StatefulWidget {
-  const _Offers({super.key});
+  const _Offers();
 
   @override
   State<_Offers> createState() => _OffersState();

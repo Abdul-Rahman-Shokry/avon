@@ -32,7 +32,7 @@ class CategoriesPage extends StatelessWidget {
 class _Item extends StatelessWidget {
   final CategoryItemModel model;
 
-  const _Item({super.key, required this.model});
+  const _Item({required this.model});
 
   @override
   Widget build(BuildContext context) {

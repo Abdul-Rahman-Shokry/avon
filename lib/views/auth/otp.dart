@@ -1,3 +1,4 @@
+import 'package:avon/core/logic/cache_helper.dart';
 import 'package:avon/core/widgets/app_otp.dart';
 import 'package:avon/views/auth/create_password.dart';
 import 'package:avon/views/auth/success_dialog.dart';
@@ -55,7 +56,7 @@ class OtpView extends StatelessWidget {
                       "We just sent a 4-digit verification code to your email ",
                   children: [
                     TextSpan(
-                      text: "amramer522@gmail.com. ",
+                      text: "${CacheHelper.email}. ",
                       style: TextStyle(fontWeight: FontWeight.w700),
                     ),
                     TextSpan(

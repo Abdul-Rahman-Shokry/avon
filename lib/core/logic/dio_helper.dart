@@ -1,6 +1,6 @@
 import 'package:avon/core/logic/cache_helper.dart';
 import 'package:avon/core/utils/helper_methods.dart';
-import 'package:avon/views/auth/login.dart';
+import 'package:avon/views/auth/login/view.dart';
 import 'package:dio/dio.dart';
 
 enum DataState { loading, failed, success }

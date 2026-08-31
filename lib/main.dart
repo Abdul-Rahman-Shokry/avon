@@ -1,12 +1,7 @@
 import 'package:avon/core/logic/cache_helper.dart';
-import 'package:avon/views/auth/login.dart';
-import 'package:avon/views/checkout.dart';
-import 'package:avon/views/growfet_videos.dart';
-import 'package:avon/views/home/view.dart';
-import 'package:avon/views/splash.dart';
+import 'package:avon/views/auth/forgot_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'core/utils/helper_methods.dart';
 
 void main() async{
@@ -94,7 +89,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: SplashView(),
+      child: ForgotPasswordView(),
     );
   }
 }

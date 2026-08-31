@@ -1,7 +1,7 @@
 part of '../view.dart';
 
 class _Products extends StatefulWidget {
-  const _Products({super.key});
+  const _Products();
 
   @override
   State<_Products> createState() => _ProductsState();

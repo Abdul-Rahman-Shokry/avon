@@ -2,9 +2,11 @@ import 'package:avon/core/logic/cache_helper.dart';
 import 'package:avon/core/logic/dio_helper.dart';
 import 'package:avon/core/utils/helper_methods.dart';
 import 'package:avon/core/widgets/app_image.dart';
-import 'package:avon/views/auth/login.dart';
+import 'package:avon/views/auth/login/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../auth/login/model.dart';
 
 part './widgets/item.dart';
 part './widgets/header.dart';

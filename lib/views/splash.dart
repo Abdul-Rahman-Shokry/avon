@@ -1,14 +1,12 @@
-import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:avon/core/logic/cache_helper.dart';
 import 'package:avon/core/widgets/app_image.dart';
-import 'package:avon/views/auth/login.dart';
+import 'package:avon/views/auth/login/view.dart';
 import 'package:avon/views/home/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../core/utils/helper_methods.dart';
-import '../main.dart';
 import 'on_boarding.dart';
 
 class SplashView extends StatefulWidget {
