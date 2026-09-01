@@ -3,7 +3,7 @@ import 'package:avon/core/utils/helper_methods.dart';
 import 'package:avon/views/auth/login/view.dart';
 import 'package:dio/dio.dart';
 
-enum DataState { loading, failed, success }
+enum DataState {initial, loading, failed, success }
 
 class DioHelper {
   static final _dio = Dio(

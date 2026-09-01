@@ -1,5 +1,6 @@
 import 'package:avon/core/logic/cache_helper.dart';
 import 'package:avon/views/auth/forgot_password.dart';
+import 'package:avon/views/auth/login/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/utils/helper_methods.dart';
@@ -89,7 +90,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: ForgotPasswordView(),
+      child: LoginView(),
     );
   }
 }

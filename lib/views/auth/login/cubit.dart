@@ -5,8 +5,10 @@ import '../../../core/logic/dio_helper.dart';
 import '../../../core/utils/helper_methods.dart';
 import '../../home/view.dart';
 import 'model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginController {
+class LoginCubit extends Cubit<DataState> {
+
   String? selectedCountryCode;
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
@@ -14,12 +16,10 @@ class LoginController {
 
   final formKey = GlobalKey<FormState>();
 
-  DataState? state;
+  LoginCubit() : super(DataState.initial);
 
   Future<void> login() async {
-    state = DataState.loading;
-    // TODO: don't forget to handle this
-    // setState(() {});
+    emit(DataState.loading);
 
     final phone = phoneController.text.trim();
     final password = passwordController.text.trim();
@@ -34,18 +34,15 @@ class LoginController {
     );
 
     if (resp.isSuccess) {
-      state = DataState.success;
+      emit(DataState.success);
       showMsg("Welcome: ${resp.successData["user"]["username"]}");
       final data = UserData.fromJson(resp.successData);
       await CacheHelper.saveUserData(data: data);
       goTo(page: HomeView(), canPop: false);
     } else {
-      state = DataState.loading;
+      emit(DataState.failed);
       showMsg(resp.errorMsg, isError: true);
     }
-
-    // TODO: don't forget to handle this
-    // setState(() {});
   }
 
   void onChangeFormData() {
